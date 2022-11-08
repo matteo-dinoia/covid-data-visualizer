@@ -1,5 +1,5 @@
 # CovidDataVisualizer
-A Visualizer for Covid Data in Italy written in Java using Java Swing and JFreeChart and a [custom library](https://github.com/matteo-dinoia/GeneralUtilsLibrary) of tools.
+A Visualizer for Covid Data in Italy (in real time) written in Java using Java Swing and JFreeChart and a [custom library](https://github.com/matteo-dinoia/GeneralUtilsLibrary) of tools.
 
 ## Images
 ![image](https://user-images.githubusercontent.com/73781428/200695238-5718edac-636c-4ae7-9cd5-1ba3244daff0.png)
