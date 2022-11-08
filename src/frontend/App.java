@@ -4,8 +4,14 @@ package frontend;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
-import javax.swing.*;
-import org.jfree.data.time.*;
+
+import javax.swing.JCheckBox;
+import javax.swing.JFrame;
+import javax.swing.JMenu;
+import javax.swing.JMenuBar;
+import javax.swing.JMenuItem;
+
+import org.jfree.data.time.RegularTimePeriod;
 
 import plot.GraphDataSet;
 import plot.PlotDateValue;
@@ -13,7 +19,7 @@ import plot.PlotDateValue;
 
 public class App  extends JFrame implements ActionListener{
 	private static final long serialVersionUID = 3572038579326256150L;
-	
+
 	private PlotDateValue plot;
 	private ArrayList<JCheckBox> itemsMenu=new ArrayList<>();
  	private ArrayList<GraphDataSet<RegularTimePeriod, Double>> dataSets=GraphDataSet.getListsDateValueByCSV(
@@ -28,13 +34,13 @@ public class App  extends JFrame implements ActionListener{
 		//graph
 		plot=new  PlotDateValue(dataSets);
 		this.add(plot.getChartPanel());
-		
+
 		//frame
 		this.createMenuVisibility();
 		this.setParams();
 	}
-	
-	
+
+
 	//GRAPHICS
 	private void setParams() {
 		this.setSize(600,600);
@@ -45,8 +51,8 @@ public class App  extends JFrame implements ActionListener{
 		JMenu visibilityMenu=new JMenu("Visibility");
 		this.setJMenuBar(new JMenuBar());
 		this.getJMenuBar().add(visibilityMenu);
-		
-		
+
+
 		//Add and remove all
 		JMenuItem addAll=new JMenuItem("Add all");
 		JMenuItem removeAll=new JMenuItem("Remove all");
@@ -57,36 +63,35 @@ public class App  extends JFrame implements ActionListener{
 		visibilityMenu.add(removeAll);
 		addAll.addActionListener(this);
 		removeAll.addActionListener(this);
-		
-		
+
+
 		//Single visibility
 		for(int i=0; i<dataSets.size(); i++) {
 			JCheckBox item=new JCheckBox(dataSets.get(i).getLegend());
 			item.setSelected(true);
 			item.addActionListener(this);
-			
+
 			itemsMenu.add(item);
 			visibilityMenu.add(item);
 			item.addActionListener(this);
 		}
-		
-		
+
+
 	}
-	
-	
-	
+
+
+
 	//LISTENER
 	@Override public void actionPerformed(ActionEvent e) {
 		String command=e.getActionCommand();
-		
+
 		if(command.equals("addAll")||command.equals("removeAll")) {
 			boolean ris=command.equals("addAll");
-			
-			for(int i=0; i<itemsMenu.size(); i++) {
+
+			for(int i=0; i<itemsMenu.size(); i++)
 				itemsMenu.get(i).setSelected(ris);
-			}
 		}
-		
+
 		for(int i=0; i<itemsMenu.size(); i++) {
 			boolean ris=itemsMenu.get(i).isSelected();
 			plot.setVisible(i, ris);
